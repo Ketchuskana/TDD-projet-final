@@ -1,0 +1,18 @@
+{
+  "resourceName": "userTable",
+  "tableName": "userTable",
+  "partitionKey": {
+    "fieldName": "userID",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "email",
+      "partitionKey": {
+        "fieldName": "userID",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}
