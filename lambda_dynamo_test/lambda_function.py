@@ -4,14 +4,14 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-    table = dynamodb.Table('userTable')  # Ici, dans la fonction
+    table = dynamodb.Table('userTable')
 
     try:
         data = json.loads(event['body'])
         user_id = data['userID']
         name = data['name']
         email = data['email']
-        
+
         table.put_item(
             Item={
                 'userID': user_id,
@@ -29,6 +29,7 @@ def lambda_handler(event, context):
             'body': json.dumps({'error': f'Missing field {str(e)}'})
         }
     except ClientError as e:
+        print("ClientError:", e)
         return {
             'statusCode': 500,
             'body': json.dumps({'error': 'Could not save user'})
