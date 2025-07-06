@@ -5,11 +5,16 @@ from botocore.exceptions import ClientError
 def lambda_handler(event, context):
     print("Received event:", event)
     print("EVENT:", json.dumps(event))
+
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-    table = dynamodb.Table('userTable')
+    table = dynamodb.Table('userTable-dev')
 
     try:
-        data = json.loads(event['body'])
+        if 'body' in event:
+            data = json.loads(event['body'])
+        else:
+            data = event
+
         user_id = data['userID']
         name = data['name']
         email = data['email']
