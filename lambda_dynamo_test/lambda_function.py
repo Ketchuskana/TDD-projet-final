@@ -3,6 +3,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
+    print("Received event:", event)
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('userTable')
 
