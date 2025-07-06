@@ -28,7 +28,14 @@ def lambda_handler(event, context):
         )
         return {
             'statusCode': 200,
-            'body': json.dumps({'message': 'User saved successfully!'})
+            'body': json.dumps({
+                'message': 'User saved successfully!',
+                'user': {
+                    # 'userID': user_id,
+                    'name': name,
+                    'email': email
+                }
+            })
         }
     except KeyError as e:
         return {
