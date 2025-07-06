@@ -4,6 +4,7 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
     print("Received event:", event)
+    print("EVENT:", json.dumps(event))
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('userTable')
 
